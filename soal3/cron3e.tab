@@ -1,0 +1,3 @@
+0 7 * * 1-5 bash /mnt/c/Users/shidqi/sisop1/soal3d.sh
+0 18 * * 1-5 bash /mnt/c/Users/shidqi/sisop1/soal3d.sh -u
+
