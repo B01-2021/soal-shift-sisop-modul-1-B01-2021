@@ -1,4 +1,6 @@
 #!/bin/bash
+parent="/mnt/c/Users/shidqi/sisop1"
+cd $parent
 
 x=1
 while [ $x -le 23 ]
