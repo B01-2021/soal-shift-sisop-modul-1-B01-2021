@@ -51,5 +51,41 @@ grep -oP "($reg_err_msgs)" "$INPUT" | sort | uniq -c
 mengambil pesan dari jenis log error dengan pesan yang sudah diurutkan sesuai abjad dengan command `sort` dan command  `uniq -c` untuk menampilkan pesan yang sama dan menghitung jumlahnya. Sehingga format perbarisnya menjadi `(jumlah) (pesan)`.
 
 ### 1.c
+```
+reg_err='(?<=ERROR ).*(?=\))'
+```
+regex untuk mendapatkan pesan dari jenis log error beserta usernamenya di tiap baris.
+```
+reg_info='(?<=INFO ).*(?=\))'
+```
+regex untuk mendapatkan pesan dari jenis log info beserta usernamenya di tiap baris.
+```
+err=$(grep -oP "($reg_err)" "$INPUT")
+```
+variabel `err` menyimpan hasil dari regex `reg_err`.
+```
+info=$(grep -oP "($reg_info)" "$INPUT")
+```
+variabel `info` menyimpan hasil dari regex `reg_info`.
+```
+grep -oP "$reg_users" "$INPUT" | sort | uniq
+```
+mengambil semua username yang ada pada syslog.log
+```
+while read user;
+do
+    count_error=$(grep -E "$user" <<< "$err" -c)
+    count_info=$(grep -E "$user" <<< "$info" -c)
+    echo "$user,$count_info,$count_error"
+done
+```
+melakukan perulangan while untuk setiap baris dari hasil `grep` sebelumnya dengan variabel `$user` di setiap barisnya.
+`count_error=$(grep -E "$user" <<< "$err" -c)` -- menghitung banyaknya error tiap `$user`
+`count_info=$(grep -E "$user" <<< "$info" -c)` -- menghitung banyaknya info tiap `$user`
 
+### 1.d
+memasukkan hasil dari soal 1.b ke file `OUTPUT1=error_message.csv` sesuai ketentuan soal.
+
+### 1.e
+memasukkan hasil dari soal 1.c ke file `OUTPUT2=user_statistic.csv` sesuai ketentuan soal.
 
