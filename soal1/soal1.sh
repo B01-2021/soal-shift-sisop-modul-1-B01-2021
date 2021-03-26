@@ -38,7 +38,7 @@ done
 echo "Username,INFO,ERROR" > "$OUTPUT2"
 grep -oP "$reg_users" "$INPUT" | sort | uniq | while read user;
 do
-    n_error=$(grep -E "$user" <<< "$err" -c)
-    n_info=$(grep -E "$user" <<< "$info" -c)
+    count_error=$(grep -E "$user" <<< "$err" -c)
+    count_info=$(grep -E "$user" <<< "$info" -c)
     echo "$user,$count_info,$count_error" >> "$OUTPUT2"
 done
