@@ -1,4 +1,6 @@
 #!/bin/bash
+parent="/mnt/c/Users/shidqi/sisop1"
+cd $parent
 
 d=`date +%m%d%Y`
 
