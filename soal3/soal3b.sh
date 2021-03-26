@@ -1,16 +1,24 @@
 #!/bin/bash
 
+download=`ls -1 | awk 'BEGIN{ x = 0; y = 0 } /^Kucing_/ { ++x } /^Kelinci_/ { ++y } END{ if ( x <= y ) { printf "Kucing_" } else { printf "Kelinci_" }}'`
 datestr=`date +%d-%m-%Y`
-mkdir $datestr
+dirname=$download$datestr
+mkdir $dirname
 
-mv Foto.log $datestr
+if [ $download == 'Kucing_' ]
+then
+  bash soal3a.sh
+else
+  bash soal3c.sh
+fi
+
+mv Foto.log $dirname
 for file in *
 do
   if [[ $file == *Koleksi* ]]
   then
-    mv $file $datestr
+    mv $file $dirname
   fi
 done
-
 
 
