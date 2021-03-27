@@ -2,7 +2,7 @@
 parent="/mnt/c/Users/shidqi/sisop1"
 cd $parent
 
-d=`date +%m%d%Y`
+d=$(date +%m%d%Y)
 
 zip -mr -P $d Koleksi . -i "*.jpg" "*.log"
 rm -d \Kucing*
