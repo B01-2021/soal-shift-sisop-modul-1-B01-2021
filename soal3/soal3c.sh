@@ -36,7 +36,8 @@ done
 mv Foto.log $dirname
 for file in *
 do
-	@@ -22,5 +13,3 @@ do
+  if [[ $file == *Koleksi* ]]
+  then
     mv $file $dirname
   fi
 done
