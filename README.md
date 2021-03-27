@@ -213,3 +213,133 @@ END {
     print "Wilayah bagian (region) yang memiliki total keuntungan (profit) yang paling sedikit adalah "min_reg " dengan total keuntungan " min "\n"; 
 }' $DIR >> $NAMA_FILE
 ```
+
+# Soal 3
+### 3.a 
+Membuat script untuk **mengunduh** 23 gambar dari "https://loremflickr.com/320/240/kitten" serta **menyimpan** log-nya ke file "Foto.log". Karena gambar yang diunduh acak, ada kemungkinan gambar yang sama terunduh lebih dari sekali, oleh karena itu kalian harus **menghapus** gambar yang sama (tidak perlu **mengunduh** gambar lagi untuk menggantinya). Kemudian **menyimpan** gambar-gambar tersebut dengan nama "Koleksi_XX" dengan nomor yang berurutan tanpa ada nomor yang hilang (contoh : Koleksi_01, Koleksi_02, ...)
+```
+# !/bin/bash
+parent="/mnt/c/Users/shidqi/sisop1"
+cd $parent
+
+x=1
+while [ $x -le 23 ]
+do
+    wget -o /dev/stdout -nv https://loremflickr.com/320/240/kitten | tee -a foto.log
+    x=$(( $x + 1 ))
+done 
+
+md5sum * | sort | awk 'BEGIN{hash = ""} $1 == hash {print $2} {hash = $1}' | xargs rm
+
+num=1
+for file in *
+do
+    if [[ $file == *"kitten"* ]]
+    then
+        filename=`printf "Koleksi_%02d.jpg" $num`
+        mv $file $filename
+        num=$(($num+1))
+    fi
+done
+```
+
+### 3.b
+Karena Kuuhaku malas untuk menjalankan script tersebut secara manual, ia juga meminta kalian untuk menjalankan script tersebut **sehari sekali pada jam 8 malam** untuk tanggal-tanggal tertentu setiap bulan, yaitu dari **tanggal 1 tujuh hari sekali (1,8,...)**, serta dari **tanggal 2 empat hari sekali(2,6,...)**. Supaya lebih rapi, gambar yang telah diunduh beserta **log-nya, dipindahkan ke folder** dengan nama **tanggal unduhnya** dengan **format "DD-MM-YYYY"** (contoh : "13-03-2023").
+
+**File soal3b.sh**
+```
+#!/bin/bash
+parent="/mnt/c/Users/shidqi/sisop1"
+cd $parent
+
+dirname=`date +%d-%m-%Y`
+mkdir $dirname
+
+mv Foto.log $dirname
+for file in *
+do
+  if [[ $file == *Koleksi* ]]
+  then
+    mv $file $dirname
+  fi
+done
+```
+
+**Cron cron3b.tab**
+```
+0 20 1-31/7,2-31/4 * * bash mnt/c/Users/shidqi/sisop1/soal3b.sh
+```
+
+### 3.c
+Agar kuuhaku tidak bosan dengan gambar anak kucing, ia juga memintamu untuk **mengunduh** gambar kelinci dari "https://loremflickr.com/320/240/bunny". Kuuhaku memintamu mengunduh gambar kucing dan kelinci secara **bergantian** (yang pertama bebas. contoh : tanggal 30 kucing > tanggal 31 kelinci > tanggal 1 kucing > ... ). Untuk membedakan folder yang berisi gambar kucing dan gambar kelinci, **nama folder diberi awalan** "Kucing_" atau "Kelinci_" (contoh : "Kucing_13-03-2023").
+
+```
+#!/bin/bash
+parent="/mnt/c/Users/shidqi/sisop1"
+cd $parent
+
+download=`ls -1 | awk 'BEGIN{ x = 0; y = 0 } /^Kucing_/ { ++x } /^Kelinci_/ { ++y } END{ if ( x <= y ) { printf "Kucing_" } else { printf "Kelinci_" }}'`
+datestr=`date +%d-%m-%Y`
+dirname=$download$datestr
+mkdir $dirname
+
+x=1
+while [ $x -le 23 ]
+do
+  if [ $download == 'Kucing_' ]
+  then
+    wget -o /dev/stdout -nv https://loremflickr.com/320/240/kitten | tee -a Foto.log
+    x=$((x+1))
+  else
+    wget -o /dev/stdout -nv https://loremflickr.com/320/240/bunny | tee -a Foto.log
+    x=$((x+1))
+  fi
+done
+
+md5sum * | sort | awk 'BEGIN{hash = ""} $1 == hash {print $2} {hash = $1}' | xargs rm
+
+num=1
+for file in *
+do
+  if [[ $file == *"kitten"* || $file == *"bunny"* ]]
+  then
+    filename=`printf "Koleksi_%02d.jpg" $num`
+    mv $file $filename
+    num=$(($num+1))
+  fi
+done
+
+mv Foto.log $dirname
+for file in *
+do
+  if [[ $file == *Koleksi* ]]
+  then
+    mv $file $dirname
+  fi
+done
+```
+
+### 3.d
+Untuk mengamankan koleksi Foto dari Steven, Kuuhaku memintamu untuk membuat script yang akan **memindahkan seluruh folder ke zip** yang diberi nama “Koleksi.zip” dan **mengunci** zip tersebut dengan **password** berupa tanggal saat ini dengan format "MMDDYYYY" (contoh : “03032003”).
+
+**File soal3d.sh**
+```
+#!/bin/bash
+parent="/mnt/c/Users/shidqi/sisop1"
+cd $parent
+
+d=$(date +%m%d%Y)
+
+zip -mr -P $d Koleksi . -i "*.jpg" "*.log"
+rm -d \Kucing*
+rm -d \Kelinci*
+```
+
+### 3.e
+Karena kuuhaku hanya bertemu Steven pada saat kuliah saja, yaitu setiap hari kecuali sabtu dan minggu, dari jam 7 pagi sampai 6 sore, ia memintamu untuk membuat koleksinya **ter-zip** saat kuliah saja, selain dari waktu yang disebutkan, ia ingin koleksinya **ter-unzip** dan **tidak ada file zip** sama sekali.
+
+**Cron cron3e.tab**
+```
+0 7 * * 1-5 bash /mnt/c/Users/shidqi/sisop1/soal3d.sh
+0 18 * * 1-5 unzip -P $(date +%m%d%Y) /mnt/c/Users/shidqi/sisop1/Koleksi && rm mnt/c/Users/shidqi/sisop1/*.zip
+```
