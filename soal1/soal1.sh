@@ -28,8 +28,8 @@ err=$(grep -oP "($reg_err)" "$INPUT")
 info=$(grep -oP "($reg_info)" "$INPUT")
 grep -oP "$reg_users" "$INPUT" | sort | uniq | while read user;
 do
-    count_error=$(grep -E "$user" <<< "$err" -c)
-    count_info=$(grep -E "$user" <<< "$info" -c)
+    count_error=$(grep -w "$user" <<< "$err" -c)
+    count_info=$(grep -w "$user" <<< "$info" -c)
     echo "$user,$count_info,$count_error"
 done
 
@@ -44,7 +44,7 @@ done
 echo "Username,INFO,ERROR" > "$OUTPUT2"
 grep -oP "$reg_users" "$INPUT" | sort | uniq | while read user;
 do
-    count_error=$(grep -E "$user" <<< "$err" -c)
-    count_info=$(grep -E "$user" <<< "$info" -c)
+    count_error=$(grep -w "$user" <<< "$err" -c)
+    count_info=$(grep -w "$user" <<< "$info" -c)
     echo "$user,$count_info,$count_error" >> "$OUTPUT2"
 done
