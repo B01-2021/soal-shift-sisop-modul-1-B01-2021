@@ -252,6 +252,8 @@ Karena Kuuhaku malas untuk menjalankan script tersebut secara manual, ia juga me
 parent="/mnt/c/Users/shidqi/sisop1"
 cd $parent
 
+bash soal3a.sh
+
 dirname=`date +%d-%m-%Y`
 mkdir $dirname
 
@@ -341,5 +343,5 @@ Karena kuuhaku hanya bertemu Steven pada saat kuliah saja, yaitu setiap hari kec
 **Cron cron3e.tab**
 ```
 0 7 * * 1-5 bash /mnt/c/Users/shidqi/sisop1/soal3d.sh
-0 18 * * 1-5 unzip -P $(date +%m%d%Y) /mnt/c/Users/shidqi/sisop1/Koleksi && rm mnt/c/Users/shidqi/sisop1/*.zip
+0 18 * * 1-5 unzip -P $(date +%m%d%Y) /mnt/c/Users/shidqi/sisop1/Koleksi && rm "mnt/c/Users/shidqi/sisop1/*.zip"
 ```
