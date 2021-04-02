@@ -88,8 +88,8 @@ Melakukan perulangan while untuk setiap baris dari hasil `grep` sebelumnya denga
 ```
 while read user;
 do
-    count_error=$(grep -E "$user" <<< "$err" -c) #menghitung banyaknya error tiap `$user`
-    count_info=$(grep -E "$user" <<< "$info" -c) #menghitung banyaknya info tiap `$user`
+    count_error=$(grep -w "$user" <<< "$err" -c) #menghitung banyaknya error tiap `$user`
+    count_info=$(grep -w "$user" <<< "$info" -c) #menghitung banyaknya info tiap `$user`
     echo "$user,$count_info,$count_error"
 done
 ```
