@@ -100,8 +100,8 @@ Melakukan perulangan while untuk setiap baris dari hasil `grep` sebelumnya denga
 ```
 while read user;
 do
-    count_error=$(grep -E "$user" <<< "$err" -c) #menghitung banyaknya error tiap `$user`
-    count_info=$(grep -E "$user" <<< "$info" -c) #menghitung banyaknya info tiap `$user`
+    count_error=$(grep -w "$user" <<< "$err" -c) #menghitung banyaknya error tiap `$user`
+    count_info=$(grep -w "$user" <<< "$info" -c) #menghitung banyaknya info tiap `$user`
     echo "$user,$count_info,$count_error"
 done
 ```
@@ -311,6 +311,8 @@ Karena Kuuhaku malas untuk menjalankan script tersebut secara manual, ia juga me
 parent="/mnt/c/Users/shidqi/sisop1"
 cd $parent
 
+bash soal3a.sh
+
 dirname=`date +%d-%m-%Y`
 mkdir $dirname
 
@@ -400,5 +402,5 @@ Karena kuuhaku hanya bertemu Steven pada saat kuliah saja, yaitu setiap hari kec
 **Cron cron3e.tab**
 ```
 0 7 * * 1-5 bash /mnt/c/Users/shidqi/sisop1/soal3d.sh
-0 18 * * 1-5 unzip -P $(date +%m%d%Y) /mnt/c/Users/shidqi/sisop1/Koleksi && rm mnt/c/Users/shidqi/sisop1/*.zip
+0 18 * * 1-5 unzip -P $(date +%m%d%Y) /mnt/c/Users/shidqi/sisop1/Koleksi && rm "mnt/c/Users/shidqi/sisop1/*.zip"
 ```

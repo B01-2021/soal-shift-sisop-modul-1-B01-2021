@@ -2,6 +2,8 @@
 parent="/mnt/c/Users/shidqi/sisop1"
 cd $parent
 
+bash soal3a.sh
+
 dirname=`date +%d-%m-%Y`
 mkdir $dirname
 
