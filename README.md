@@ -171,7 +171,7 @@ NR>1 {
     }
 } 
 END {
-    print "Transaksi terakhir dengan profit percentage terbesar yaitu "trans_id[max_id]" dengan presetase "max_profit"% \n"
+    print "Transaksi terakhir dengan profit percentage terbesar yaitu "max_id" dengan presetase "max_profit"% \n"
 }' $DIR >> $NAMA_FILE
 ```
 
@@ -223,7 +223,7 @@ BEGIN {
 NR>1 {
     for(type in Segmen) 
         if($8==type) 
-            Segmen[type]=Segmen[type] + $(NF-2); 
+            Segmen[type]=Segmen[type] + 1; 
 } 
 END {
     for(type in Segmen) 
