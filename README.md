@@ -48,7 +48,9 @@ Variabel dari hasil setiap regex :
     ```
     users=$(grep -oP "$reg_users" "$INPUT")
     ```
-
+x-special/nautilus-clipboard
+copy
+file:///home/fiqey/Pictures/Screenshot%20from%202021-03-25%2014-47-24.png
 
 ### 1.b
 Ryujin harus menampilkan semua pesan error yang muncul beserta jumlah kemunculannya.
@@ -57,6 +59,16 @@ Ryujin harus menampilkan semua pesan error yang muncul beserta jumlah kemunculan
 grep -oP "($reg_err_msgs)" "$INPUT" | sort | uniq -c 
 ```
 **Penjelasan :** mengambil pesan dari jenis log error dengan pesan yang sudah diurutkan sesuai abjad dengan command `sort` dan command  `uniq -c` untuk menampilkan pesan yang sama dan menghitung jumlahnya. Sehingga format perbarisnya menjadi `(jumlah) (pesan)`.
+
+**Hasil :** 
+```
+Connection to DB failed,13
+Permission denied while closing ticket,10
+The ticket was modified while updating,9
+Ticket doesn't exist,7
+Timeout while retrieving information,15
+Tried to add information to closed ticket,12
+```
 
 ### 1.c
 Ryujin juga harus dapat menampilkan jumlah kemunculan log ERROR dan INFO untuk setiap user-nya.
@@ -92,6 +104,30 @@ do
     count_info=$(grep -E "$user" <<< "$info" -c) #menghitung banyaknya info tiap `$user`
     echo "$user,$count_info,$count_error"
 done
+```
+
+**Hasil :**
+```
+ac,2,2
+ahmed.miller,2,4
+blossom,2,6
+bpacheco,0,2
+breee,1,5
+britanni,1,1
+enim.non,2,3
+flavia,0,5
+jackowens,2,4
+kirknixon,2,1
+mai.hendrix,0,3
+mcintosh,4,3
+mdouglas,2,3
+montanap,0,4
+noel,6,3
+nonummy,2,3
+oren,2,7
+rr.robinson,2,1
+sri,2,2
+xlg,0,4
 ```
 
 ### 1.d
@@ -139,6 +175,11 @@ END {
 }' $DIR >> $NAMA_FILE
 ```
 
+**Hasil :**
+```
+Transaksi terakhir dengan profit percentage terbesar yaitu 9952 dengan presetase 100% 
+```
+
 ## 2.b
 Clemong memiliki rencana promosi di Albuquerque menggunakan metode MLM. Oleh karena itu, Clemong membutuhkan daftar **nama customer pada transaksi tahun 2017 di Albuquerque**.
 
@@ -160,6 +201,14 @@ END {
 }' $DIR >> $NAMA_FILE
 ```
 
+**Hasil :**
+```
+Daftar nama customer di Albuquerque pada tahun 2017 antara lain: 
+Benjamin Farhat
+David Wiener
+Michelle Lonsdale
+Susan Vittorini
+```
 ## 2.c
 TokoShiSop berfokus tiga segment customer, antara lain: Home Office, Customer, dan Corporate. Clemong ingin meningkatkan penjualan pada segmen customer yang paling sedikit. Oleh karena itu, Clemong membutuhkan **segment customer** dan **jumlah transaksinya yang paling sedikit**.
 
@@ -184,6 +233,11 @@ END {
         } 
     print "Tipe segmen customer yang penjualannya paling sedikit adalah "min_type " dengan jumlah transaksi " min "\n"; 
 }' $DIR >> $NAMA_FILE
+```
+
+**Hasil :**
+```
+Tipe segmen customer yang penjualannya paling sedikit adalah Home Office dengan jumlah transaksi 1783
 ```
 
 ## 2.d
@@ -212,6 +266,11 @@ END {
         } 
     print "Wilayah bagian (region) yang memiliki total keuntungan (profit) yang paling sedikit adalah "min_reg " dengan total keuntungan " min "\n"; 
 }' $DIR >> $NAMA_FILE
+```
+
+**Hasil :**
+```
+Tipe segmen customer yang penjualannya paling sedikit adalah Home Office dengan jumlah transaksi 1783
 ```
 
 # Soal 3
