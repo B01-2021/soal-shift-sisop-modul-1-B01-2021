@@ -153,8 +153,8 @@ Screenshot hasil:
 
 Kendala ketika pengerjaan:    
 Kendala tidak sempat didokumentasikan karena tidak tahu jika digunakan dalam lapres. 
-Mungkin, pada awal mengerjakan soal ini cukup lama untuk menemukan bagaimana mendapatkan pesan yang sesuai dengan ketentuan (implementasi regex) hingga kami menemukan [referensi pattern regex ini](https://www.golinuxcloud.com/print-next-word-after-pattern-match-linux/) dan [referensi while read loop multiple line in grep result](https://serverfault.com/questions/437484/while-loop-read-multiple-lines-from-a-grep). Dan sempat terjadi revisi pada bagian 1c dan 1e dimana pada awalnya menggunakan grep -eP `count_error=$(grep -eP "$user" <<< "$err" -c)` menjadi grep -w `count_error=$(grep -w "$user" <<< "$err" -c)` untuk `match-exact-string-using-grep`
-
+Mungkin, pada awal mengerjakan soal ini cukup lama untuk menemukan bagaimana mendapatkan pesan yang sesuai dengan ketentuan (implementasi regex) hingga kami menemukan [referensi pattern regex ini](https://www.golinuxcloud.com/print-next-word-after-pattern-match-linux/) dan [referensi while read loop multiple line in grep result](https://serverfault.com/questions/437484/while-loop-read-multiple-lines-from-a-grep). 
+Terdapat salah perhitungan jumlah log info dan error pada username "ac" karena tidak menggunakan `-w` sehingga akan mendeteksi 'ac' sebagai substring dan menghitung log info dan error pada username "jackowens"
 
 # Soal 2
 Steven dan Manis mendirikan sebuah startup bernama “TokoShiSop”. Sedangkan kamu dan Clemong adalah karyawan pertama dari TokoShiSop. Setelah tiga tahun bekerja, Clemong diangkat menjadi manajer penjualan TokoShiSop, sedangkan kamu menjadi kepala gudang yang mengatur keluar masuknya barang.
@@ -439,4 +439,5 @@ Karena kuuhaku hanya bertemu Steven pada saat kuliah saja, yaitu setiap hari kec
 
 ### Dokumentasi dan Kendala
 Kendala ketika pengerjaan:    
-Cukup lancar tetapi sempat mengalami sedikit salah paham
+Saat pengeksekusian crontab, working directory yang digunakan adalah root, sehingga perlu dilakukan penyesuaian terhadap relative path. Hal ini dilakukan dengan cara melakukan change directory di awal script.
+
