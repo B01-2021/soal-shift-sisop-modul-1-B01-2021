@@ -1,4 +1,12 @@
-# soal-shift-sisop-modul-1-B01-2021
+# lapres-sisop-modul-1-B01-2021
+
+Laporan resmi berisi dokumentasi soal shift Sisop Modul 1.
+---
+Kelompok B01:
+- Shidqi Dhaifullah	05111940000108
+- Fiqey Indriati Eka Sari	05111940000015
+- Bunga Fairuz Wijdan	05111940000030
+---
 
 # Soal 1
 Ryujin baru saja diterima sebagai IT support di perusahaan Bukapedia. Dia diberikan tugas untuk membuat laporan harian untuk aplikasi internal perusahaan, ticky. Terdapat 2 laporan yang harus dia buat, yaitu laporan **daftar peringkat pesan error** terbanyak yang dibuat oleh ticky dan laporan **penggunaan user** pada aplikasi ticky. Untuk membuat laporan tersebut, Ryujin harus melakukan beberapa hal berikut:
@@ -135,6 +143,17 @@ Memasukkan hasil dari soal 1.b ke file `OUTPUT1=error_message.csv` sesuai ketent
 
 ### 1.e
 Memasukkan hasil dari soal 1.c ke file `OUTPUT2=user_statistic.csv` sesuai ketentuan soal.
+
+### Dokumentasi dan Kendala
+Screenshot hasil:
+- error_message.csv
+<img src="/soal1/error_message.jpeg" width="600">
+- user_statistic.csv
+<img src="/soal1/user_statistic.jpeg" width="600">
+
+Kendala ketika pengerjaan:    
+Kendala tidak sempat didokumentasikan karena tidak tahu jika digunakan dalam lapres. 
+Mungkin, pada awal mengerjakan soal ini cukup lama untuk menemukan bagaimana mendapatkan pesan yang sesuai dengan ketentuan (implementasi regex) hingga kami menemukan [referensi pattern regex ini](https://www.golinuxcloud.com/print-next-word-after-pattern-match-linux/) dan [referensi while read loop multiple line in grep result](https://serverfault.com/questions/437484/while-loop-read-multiple-lines-from-a-grep). Dan sempat terjadi revisi pada bagian 1c dan 1e dimana pada awalnya menggunakan grep -eP `count_error=$(grep -eP "$user" <<< "$err" -c)` menjadi grep -w `count_error=$(grep -w "$user" <<< "$err" -c)` untuk `match-exact-string-using-grep`
 
 
 # Soal 2
@@ -273,6 +292,15 @@ END {
 Tipe segmen customer yang penjualannya paling sedikit adalah Home Office dengan jumlah transaksi 1783
 ```
 
+### Dokumentasi dan Kendala
+Screenshot hasil keseluruhan:
+- hasil.txt
+<img src="/soal2/hasil.jpeg" width="600">
+
+Kendala ketika pengerjaan:    
+Dalam mengerjakan soal ini bisa terbilang lancar karena cukup mengenal `awk`. Hanya saja sempat terjadi kesalahpahaman di nomor 2a yang mana seharusnya `transaction ID` merupakan `row ID` sempat dikira `order ID`. Dan untuk 2c sempat mengira total penjualan merupakan total quantity dari segmen sehingga awalnya `Segmen[type]=Segmen[type] + $(NF-3);` menjadi `Segmen[type]=Segmen[type] + 1;`. Keduanya juga segera dibenarkan dan tidak ada masalah.  
+
+
 # Soal 3
 ### 3.a 
 Membuat script untuk **mengunduh** 23 gambar dari "https://loremflickr.com/320/240/kitten" serta **menyimpan** log-nya ke file "Foto.log". Karena gambar yang diunduh acak, ada kemungkinan gambar yang sama terunduh lebih dari sekali, oleh karena itu kalian harus **menghapus** gambar yang sama (tidak perlu **mengunduh** gambar lagi untuk menggantinya). Kemudian **menyimpan** gambar-gambar tersebut dengan nama "Koleksi_XX" dengan nomor yang berurutan tanpa ada nomor yang hilang (contoh : Koleksi_01, Koleksi_02, ...)
@@ -301,6 +329,10 @@ do
     fi
 done
 ```
+
+**Hasil :**
+<img src="/soal3/foto_log_3a.jpeg" width="600">
+<img src="/soal3/cek_koleksi_3a.jpeg" width="600">
 
 ### 3.b
 Karena Kuuhaku malas untuk menjalankan script tersebut secara manual, ia juga meminta kalian untuk menjalankan script tersebut **sehari sekali pada jam 8 malam** untuk tanggal-tanggal tertentu setiap bulan, yaitu dari **tanggal 1 tujuh hari sekali (1,8,...)**, serta dari **tanggal 2 empat hari sekali(2,6,...)**. Supaya lebih rapi, gambar yang telah diunduh beserta **log-nya, dipindahkan ke folder** dengan nama **tanggal unduhnya** dengan **format "DD-MM-YYYY"** (contoh : "13-03-2023").
@@ -404,3 +436,7 @@ Karena kuuhaku hanya bertemu Steven pada saat kuliah saja, yaitu setiap hari kec
 0 7 * * 1-5 bash /mnt/c/Users/shidqi/sisop1/soal3d.sh
 0 18 * * 1-5 unzip -P $(date +%m%d%Y) /mnt/c/Users/shidqi/sisop1/Koleksi && rm "mnt/c/Users/shidqi/sisop1/*.zip"
 ```
+
+### Dokumentasi dan Kendala
+Kendala ketika pengerjaan:    
+Cukup lancar tetapi sempat mengalami sedikit salah paham
