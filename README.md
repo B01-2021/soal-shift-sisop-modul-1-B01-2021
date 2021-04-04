@@ -136,6 +136,8 @@ Memasukkan hasil dari soal 1.b ke file `OUTPUT1=error_message.csv` sesuai ketent
 ### 1.e
 Memasukkan hasil dari soal 1.c ke file `OUTPUT2=user_statistic.csv` sesuai ketentuan soal.
 
+### KENDALA
+Terdapat salah perhitungan jumlah log info dan error pada username "ac" karena tidak menggunakan `-w` sehingga akan mendeteksi 'ac' sebagai substring dan menghitung log info dan error pada username "jackowens"
 
 # Soal 2
 Steven dan Manis mendirikan sebuah startup bernama “TokoShiSop”. Sedangkan kamu dan Clemong adalah karyawan pertama dari TokoShiSop. Setelah tiga tahun bekerja, Clemong diangkat menjadi manajer penjualan TokoShiSop, sedangkan kamu menjadi kepala gudang yang mengatur keluar masuknya barang.
