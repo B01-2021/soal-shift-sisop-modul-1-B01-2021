@@ -132,9 +132,12 @@ xlg,0,4
 
 ### 1.d
 Memasukkan hasil dari soal 1.b ke file `OUTPUT1=error_message.csv` sesuai ketentuan soal.
+![image](https://user-images.githubusercontent.com/75290176/113509491-170ccf00-9580-11eb-9041-31a131be13de.png)
+
 
 ### 1.e
 Memasukkan hasil dari soal 1.c ke file `OUTPUT2=user_statistic.csv` sesuai ketentuan soal.
+![image](https://user-images.githubusercontent.com/75290176/113509479-02303b80-9580-11eb-928c-eb0761d04c86.png)
 
 ### KENDALA
 Terdapat salah perhitungan jumlah log info dan error pada username "ac" karena tidak menggunakan `-w` sehingga akan mendeteksi 'ac' sebagai substring dan menghitung log info dan error pada username "jackowens"
