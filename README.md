@@ -331,6 +331,7 @@ done
 ```
 
 **Hasil :**
+
 <img src="/soal3/foto_log_3a.jpeg" width="600">
 <img src="/soal3/cek_koleksi_3a.jpeg" width="600">
 
